@@ -1,0 +1,43 @@
+@font-face{
+	font-family:"Helvetica Neue";
+	src:url("../fonts/HelveticaNeueLTStd Lt.otf");
+}
+
+@font-face{
+	font-family:"Helvetica Neue Medium";
+	src:url("../fonts/HelveticaNeue-Medium.otf");
+}
+.contenedor{
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgb(0,0,0);
+    z-index: 10;
+}
+
+.reloj{
+
+	width: auto;
+	position: absolute;
+	color:white;
+	top:20px;
+	left: 20px;
+}
+.reloj,.clima h1{
+	font-family: 'Helvetica Neue';
+}
+.clima p{
+	font-family: 'Helvetica Neue';
+}
+
+.clima{
+	position: absolute;
+	color:white;
+	top:20px;
+	right: 20px;
+}
+.icon-clima{
+	font-size: 100px;
+}
