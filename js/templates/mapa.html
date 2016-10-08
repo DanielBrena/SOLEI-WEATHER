@@ -1,0 +1,6 @@
+<ng-map  pan-control="false"
+    map-type-control="false" geo-callback="vm.callbackMap(e)" map-type-id="ROADMAP" style="height:100%;width:100%;" zoom="11" center="{{address}}" zoom-control="false" street-view-control="false">
+      <marker on-dragend="vm.eventDrag(e)" position="{{address}}" title="drag me" animation="Animation.BOUNCE" centered="true"
+        draggable="true"></marker>
+
+    </ng-map>

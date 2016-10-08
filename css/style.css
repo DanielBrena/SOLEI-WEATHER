@@ -18,14 +18,18 @@
 }
 
 .reloj{
-
+	
 	width: auto;
 	position: absolute;
 	color:white;
 	top:20px;
 	left: 20px;
 }
+.reloj h1{
+	font-size: 110px;
+}
 .reloj,.clima h1{
+	font-size: 130px;
 	font-family: 'Helvetica Neue';
 }
 .clima p{
@@ -40,4 +44,18 @@
 }
 .icon-clima{
 	font-size: 100px;
+}
+
+.contenido{
+	color:white;
+	position: absolute;
+    background: black;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1200px;
+    text-align: center;
+}
+.comandos{
+	font-size: 40px;
 }
