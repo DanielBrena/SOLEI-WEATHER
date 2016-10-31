@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	angular.module('app',['dark-sky','ngGeolocation','ui.router','jtt_youtube','youtube-embed','ngMap'])
+	angular.module('app',['dark-sky','ngGeolocation','ui.router','jtt_youtube','youtube-embed','ngMap','Uber','jtt_flickr'])
 	.config(['darkSkyProvider', function(darkSkyProvider) {
     	darkSkyProvider
         .setApiKey('f82fbb1f6bd87b34d340fb7b39bfe342');
@@ -12,8 +12,8 @@
 	}])
 	.controller('Principal',Principal);
 
-	Principal.$inject = ['$scope','darkSky','$geolocation','$timeout','$filter','$state','youtubeFactory'];
-	function Principal($scope,darkSky,$geolocation,$timeout,$filter,$state,youtubeFactory){
+	Principal.$inject = ['$scope','darkSky','$geolocation','$timeout','$filter','$state','youtubeFactory','$http'];
+	function Principal($scope,darkSky,$geolocation,$timeout,$filter,$state,youtubeFactory,$http){
 
 		$scope.tickInterval = 1000 //ms
 
@@ -39,14 +39,24 @@
 		    'donde me encuentro':dondeMeEncuentro,
 		    'youtube *find':youtube,
 		    'yutub *find':youtube,
-		    'muéstrame el tráfico':trafico,
-		    'Muéstrame el tráfico':trafico,
+		    'YouTube *find':youtube,
+		    'luutub *find':youtube,
+		    'iutube *find':youtube,
+		    'video *find':youtube,
+		    'vídeo *find':youtube,
+		    'Vídeo *find':youtube,
+		    'Dime el tráfico':trafico,
 		    'dime el tráfico':trafico,
 		    'Chiste':chiste,
 		    'chiste':chiste,
 		    'invita':invita,
 		    'estoy bonita':alago,
-		    'Estoy bonita':alago
+		    'Estoy bonita':alago,
+		    'Uber productos':uberProductos,
+		    'muestrame *tag':muestrame,
+		    'Muestrame *tag':muestrame,
+		    'Muéstrame *tag':muestrame,
+		    'muéstrame *tag':muestrame
 		  };
 
 		  annyang.addCommands(commands);
@@ -77,6 +87,20 @@
     		$scope.long = newPosition.coords.longitude;
     		location(newPosition.coords.latitude,newPosition.coords.longitude);
 		})
+
+		function muestrame(tag){
+			console.log(tag);
+			$state.go('imagenes',{id:tag});
+			
+			
+		}
+
+		function success(response){
+			return response.data;
+		}
+		function error(e){
+			return e;
+		}
 
 		
 		function alago(){
@@ -114,7 +138,7 @@
         	var temperatura = $scope.weather.currently.temperature;
         	temperatura = temperatura.toFixed(1)
         	responsiveVoice.speak("El clima es: "+ temperatura +"grados" , "Spanish Latin American Female");
-        	responsiveVoice.speak($scope.weather.currently.summary , "Spanish Latin American Female");
+        	responsiveVoice.speak($scope.weather.currently.summary +"Te recomiendo usar ropa abrigada el dia de hoy" , "Spanish Latin American Female");
         }
 
         function dimeMiUbicacion(){
@@ -169,6 +193,23 @@
           });
         }
 
+        function uberProductos(){
+        	var geocoder = new google.maps.Geocoder();
+          var latLng = new google.maps.LatLng($scope.lat,$scope.long);
+          geocoder.geocode({'latLng':latLng},function(results,status){
+            if(status == google.maps.GeocoderStatus.OK){
+              console.log(results);
+              if(results[0]){
+                console.log(results[0].formatted_address);
+               	$state.go('uber',{id:results[0].formatted_address});
+
+
+                
+              }
+            }
+          });
+        }
+
         function trafico(){
         	var geocoder = new google.maps.Geocoder();
           var latLng = new google.maps.LatLng($scope.lat,$scope.long);
@@ -178,12 +219,16 @@
               if(results[0]){
                 console.log(results[0].formatted_address);
                	$state.go('trafico',{id:results[0].formatted_address});
-				responsiveVoice.speak("El trafico está asi", "Spanish Latin American Female");
+				responsiveVoice.speak("El trafico para este día es", "Spanish Latin American Female");
 
                 
               }
             }
           });
+        }
+
+        function uber(){
+
         }
 
         function hola(){

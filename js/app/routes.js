@@ -38,6 +38,43 @@
 				
 
 			}
+		}).state('uber',{
+			name:'uber',
+			url:'/uber/:id',
+			templateUrl:'js/templates/uber.html',
+			controller:function($scope,$stateParams){
+				$scope.address = $stateParams.id;
+				
+
+			}
+		}).state('imagenes',{
+			name:'imagenes',
+			url:'/imagenes/:id',
+			templateUrl:'js/templates/imagenes.html',
+			controller:function($scope,$stateParams,flickrFactory){
+				$scope.tag = $stateParams.id;
+
+				muestrameImagenes($scope.tag);
+
+				function muestrameImagenes(tag){
+					flickrFactory.getImagesByTags({
+					    tags:tag
+					}).then(function(_data){
+						$scope.imagenes = _data.data.items;
+						console.log(_data.data.items);
+					    //on success
+					}).catch(function (_data) {
+					    //on error
+					});
+			
+				}
+
+				function jsonFlickrApi(data){
+
+				}
+				
+
+			}
 		})
 		
 	

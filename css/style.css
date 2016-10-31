@@ -13,7 +13,8 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: rgb(0,0,0);
+    background: url('../img/particulas.gif') no-repeat;
+    background-size: cover;
     z-index: 10;
 }
 
@@ -49,7 +50,6 @@
 .contenido{
 	color:white;
 	position: absolute;
-    background: black;
     left: 0;
     right: 0;
     bottom: 0;
